@@ -56,11 +56,12 @@ contract StakingContract is ERC20, Ownable {
         return total;
     }
 
-    function createStake(uint256 stake) public {
+    function createStake(uint256 stake) public returns (bool) {
         // create stake
         _burn(msg.sender, stake);
         if (stakes[msg.sender] == 0) addStakeHolder(msg.sender);
         stakes[msg.sender] += stake * 2;
+        return true;
     }
 
     function removeStake(uint256 stake) public {
